@@ -149,6 +149,6 @@ if __name__ == "__main__":
 		exit('illegal synthax')
 
 	if not arg.verbose: 
-		exit(ip6.address)
+		print ip6.address
 	else:
 		exit()
