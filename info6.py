@@ -1,7 +1,8 @@
 #!/usr/bin/python
 from argparse import ArgumentParser
 import re
-class ipv6info:
+
+class address:
 
 	def __init__(self, address='::127.0.0.1'):
 		self.address = address 		
@@ -9,7 +10,7 @@ class ipv6info:
 		self.address = self.add_missing_blocks()
 		self.address = self.fill_4byte_blocks()
 	
-	def synthax_correct(self):
+	def has_correct_syntax(self):
 		address = self.address
 		regexp = re.compile(r"[^0-9|:|\.|a-f|A-F]")
 		match = re.search(regexp, arg.address)
@@ -83,7 +84,7 @@ class ipv6info:
 			return ':'.join(firstpart)
 		return address
 
-	def shorten_address(self):
+	def shorten(self):
 		address = self.address
 		segments = address.split(':')
 		start = 0
@@ -128,9 +129,9 @@ if __name__ == "__main__":
 	argp.add_argument('-v', '--verbose', help='verbose output', action='store_true')
 	argp.add_argument('address')
 	arg = argp.parse_args()
-	ip6 = ipv6info(arg.address)
+	ip6 = address(arg.address)
 	
-	if ip6.synthax_correct(): 
+	if ip6.has_correct_syntax(): 
 		ip6.address = ip6.convert_decimal_notation()
 		if arg.verbose:
 			print "without suffix in decimal notation: %s" % ip6.address
@@ -141,7 +142,7 @@ if __name__ == "__main__":
 			print "prefix                            : %s::/64" % ip6.address[0:19]	
 			print "interface identifier              :                    %s" % ip6.address[19:]
 		if arg.s:
-			ip6.address = ip6.shorten_address()
+			ip6.address = ip6.shorten()
 			if arg.verbose:
 				print "auto shorted address              : %s" % ip6.address 
 	else:
