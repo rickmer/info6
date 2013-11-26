@@ -1,3 +1,5 @@
 from info6 import address
-def add_missing_blocks_test1():
-    assert address.add_missing_blocks('::0001') == '0000:0000:0000:0000:0000:0000:0000:0001'
+
+def test_add_missing_blocks():
+    a = address('::0001')
+    assert a.add_missing_blocks() == '0000:0000:0000:0000:0000:0000:0000:0001'
