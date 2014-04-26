@@ -5,5 +5,5 @@ install:
   - "pip install -r .requirements"
   - "pip install ."
 script:
-  - py.test
-  - pylint info6.py
+  - "py.test"
+  - "pylint info6.py --errors-only"
